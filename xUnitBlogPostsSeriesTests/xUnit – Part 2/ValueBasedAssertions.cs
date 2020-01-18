@@ -5,9 +5,8 @@ using Xunit;
 
 namespace XUnitPartTwoTests
 {
-    public class AssertionsExample
+    public class ValueBasedAssertions
     {
-
         [Fact]
         public void TestingAssertions()
         {
@@ -62,27 +61,27 @@ namespace XUnitPartTwoTests
 
 
 
-             Assert.IsType<string>("passes");
+            //Assert.IsType<string>("passes");
 
-            Assert.IsNotType<string>(1);
-            Assert.IsNotType<string>("fails");
+            //Assert.IsNotType<string>(1);
+            //Assert.IsNotType<string>("fails");
 
-            Assert.IsAssignableFrom<IEnumerable<int>>(new List<int>());
-            Assert.IsAssignableFrom<IDictionary<int, string>>(new List<int>());
+            //Assert.IsAssignableFrom<IEnumerable<int>>(new List<int>());
+            //Assert.IsAssignableFrom<IDictionary<int, string>>(new List<int>());
 
 
-            Assert.Null(null);
-            Assert.NotNull(new List<int>());
+            //Assert.Null(null);
+            //Assert.NotNull(new List<int>());
 
-            var obj1 = new object();
-            var obj2 = obj1;
-            var obj3 = new object();
+            //var obj1 = new object();
+            //var obj2 = obj1;
+            //var obj3 = new object();
 
-            Assert.Same(obj1, obj2);
-            Assert.NotSame(obj1, obj3);
+            //Assert.Same(obj1, obj2);
+            //Assert.NotSame(obj1, obj3);
 
-             // It's better to call Assert.Same() instead.
-             // Assert.ReferenceEquals(obj1, obj2);
+            // It's better to call Assert.Same() instead.
+            // Assert.ReferenceEquals(obj1, obj2);
 
             /* 
             Strictly relies on the built-in behavior of val1.Equals(val2),
@@ -90,52 +89,16 @@ namespace XUnitPartTwoTests
             the correct answer for collections, etc.
             TODO: find a compelling example for it
              */
+
             Assert.StrictEqual(1, 1);
             Assert.NotStrictEqual(1, 1);
 
 
+            // Act
+            // Exception ex = Record.Exception(() => someCode());
 
-
-
-
-
-
-
-            //Assert.PropertyChanged
-            //Assert.RaisedEvent
-            //Assert.Raises
-            //Assert.RaisesAny
-            //Assert.RaisesAnyAsync
-            //Assert.RaisesAsync
-            //Assert.Throws
-            //Assert.ThrowsAny
-            //Assert.ThrowsAnyAsync
-            //Assert.ThrowsAsync
-            // Rectord.something
+            // Assert
+            // Assert.Null(ex);
         }
-
-        [Fact]
-        public void AllNumberIsEven()
-        {
-            var numbers = new List<int> { 2, 4, 6 };
-
-            Action<int> allAreEven = (a) =>
-            {
-                Assert.True(a % 2 == 0);
-            };
-
-            Assert.All(numbers, allAreEven);
-        }
-
-        [Fact]
-        public void AllNumberAreEvenAndNotZero()
-        {
-            var numbers = new List<int> { 2, 4, 6 };
-
-            Assert.Collection(numbers, a => Assert.True(a == 2), a => Assert.True(a == 4), a => Assert.True(a == 6));
-
-            // Assert.All(result, item => Assert.True(a % 2 == 0));
-        }
-
     }
 }
