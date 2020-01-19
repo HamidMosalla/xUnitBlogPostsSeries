@@ -42,12 +42,34 @@ namespace XUnitPartTwoTests
         [Fact]
         public void ThrowsExceptionAssertions()
         {
-            //Assert.Throws
-            //Assert.ThrowsAny
-            //Assert.ThrowsAnyAsync
-            //Assert.ThrowsAsync
+            var exceptionThrower = new Buggy();
 
-            // Exception ex = Record.Exception(() => someCode());
+            Assert.Throws<InvalidCastException>(exceptionThrower.ThrowsInvalidCastException);
+            Assert.ThrowsAny<CustomInvalidOperationException>(exceptionThrower.ThrowsCustomInvalidOperationException);
+        }
+
+        [Fact]
+        public void ThrowsExceptionAssertionsAsync()
+        {
+            var exceptionThrower = new Buggy();
+
+            Func<Task> ThrowExceptionFunc = () => exceptionThrower.ThrowsExceptionAsync();
+            Assert.ThrowsAsync<InvalidCastException>(ThrowExceptionFunc);
+            Assert.ThrowsAnyAsync<InvalidCastException>(ThrowExceptionFunc);
+
+            Exception ex = Record.Exception(() => exceptionThrower.ThrowsInvalidCastException());
+
+            Assert.NotNull(ex);
+        }
+
+        [Fact]
+        public void ThrowsExceptionAssertionsRecord()
+        {
+            var exceptionThrower = new Buggy();
+
+            Exception ex = Record.Exception(() => exceptionThrower.ThrowsInvalidCastException());
+
+            Assert.NotNull(ex);
         }
 
         [Fact]
