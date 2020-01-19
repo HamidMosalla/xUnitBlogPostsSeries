@@ -56,10 +56,6 @@ namespace XUnitPartTwoTests
             Func<Task> ThrowExceptionFunc = () => exceptionThrower.ThrowsExceptionAsync();
             Assert.ThrowsAsync<InvalidCastException>(ThrowExceptionFunc);
             Assert.ThrowsAnyAsync<InvalidCastException>(ThrowExceptionFunc);
-
-            Exception ex = Record.Exception(() => exceptionThrower.ThrowsInvalidCastException());
-
-            Assert.NotNull(ex);
         }
 
         [Fact]
